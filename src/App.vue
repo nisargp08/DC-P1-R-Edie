@@ -2,12 +2,12 @@
 <div id="app">
     <div class="min-h-screen">
         <div class="px-4 py-2 lg:px-16 lg:max-w-screen-lg lg:mx-auto">
-            <header>
+            <header :class="{'sticky-header' : stickyHeader}">
                 <div class="flex items-center justify-between">
-                    <p class="font-heebo font-extrabold text-2xl text-gray-1">Edie</p>
+                    <p class="font-heebo font-extrabold text-2xl text-gray-1 md:text-3xl">Edie</p>
                     <div class="md:hidden">
-                        <button @click="toggle()" class="transition-all focus:outline-none">
-                            <svg class="w-8 h-8 fill-current hover:text-blue-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <button @click="toggle()" class="focus:outline-none">
+                            <svg class="w-8 h-8 fill-current transition-ease hover:text-blue-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                             </svg>
                         </button>
@@ -178,11 +178,11 @@
         <footer id="footer" class="mt-24 bg-gray-8">
             <div class="px-10 lg:flex lg:justify-between lg:px-40 xl:max-w-screen-xl xl:mx-auto">
                 <div class="inline-block pt-8">
-                    <a class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Home</a>
-                    <a class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Services</a>
-                    <a class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Our Works</a>
-                    <a class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Clients</a>
-                    <a class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Contact</a>
+                    <a @click="scroll('#home')" class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Home</a>
+                    <a @click="scroll('#services')" class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Services</a>
+                    <a @click="scroll('#work')" class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Our Works</a>
+                    <a @click="scroll('#clients')" class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Clients</a>
+                    <a @click="scroll('#contact')" class="block font-poppins font-normal text-lg py-2 text-white hover:text-blue-1 transition-ease">Contact</a>
                 </div>
                 <div class="mt-16 lg:pt-8 lg:mt-0">
                     <p class="font-heebo font-extrabold text-4xl text-gray-6">Edie</p>
@@ -222,9 +222,15 @@
 export default {
     name: 'App',
     components: {},
+    mounted(){
+        window.addEventListener('scroll',() => {
+            this.isScrolled = Math.round(window.scrollY);
+        });
+    },
     data() {
         return {
             isOpen: false,
+            isScrolled : '',
             services: [{
                     id: 1,
                     photo: 'smarthome.jpg',
@@ -267,6 +273,15 @@ export default {
             }
         }
     },
+    computed : {
+        stickyHeader(){
+            if(this.isScrolled  > 350){
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 }
 </script>
 
@@ -279,16 +294,5 @@ export default {
     a {
         cursor: pointer;
     }
-}
-
-.slide-enter-active,
-.slide-leave-active {
-    transition: transform 0.2s ease;
-}
-
-.slide-enter,
-.slide-leave-to {
-    transform: translateX(-100%);
-    transition: all 150ms ease-in 0s
 }
 </style>

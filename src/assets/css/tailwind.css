@@ -6,5 +6,12 @@
 .transition-ease{
     @apply transition ease-in-out duration-500
 }
-
+.sticky-header {
+    @apply fixed top-0 left-0 right-0 shadow-white-1 bg-white py-2 px-10
+}
+@screen lg{
+    .sticky-header > div {
+        @apply max-w-screen-lg mx-auto
+    }
+}
 @tailwind utilities;
