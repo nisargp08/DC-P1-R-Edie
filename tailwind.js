@@ -35,12 +35,15 @@ module.exports = {
         '24px' : '24px',
       },
       spacing : {
-        'heroImg' : '56.25%'
+        'heroImg' : '56.25%',
+        '26' : '6.5rem',
       },
       fontSize : {
         'xxs' : '10px',
       },
       width : {
+        '55' : '55%',
+        '68' : '20rem',
         '80' : '80%',
       }
     },
